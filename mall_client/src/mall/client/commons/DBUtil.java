@@ -15,7 +15,7 @@ public class DBUtil {
 		return conn;
 	}
 	// 2. DB자원(conn, stmt, rs) 해제
-	public void close(Connection conn, PreparedStatement stmt, ResultSet rs) {
+	public void close(ResultSet rs,PreparedStatement stmt,  Connection conn) {
 		try {
 			rs.close();
 		} catch (Exception e) {
