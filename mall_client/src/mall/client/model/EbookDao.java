@@ -19,7 +19,7 @@ public class EbookDao {
 		ResultSet rs = null;
 		try {
 			conn = this.dbutil.getConnection();
-			String sql = "SELECT ebook_title ebookTitle, ebook_price ebookPrice, ebook_img ebookImg FROM ebook ORDER BY ebook_date DESC LIMIT ?, ?";
+			String sql = "SELECT ebook_title ebookTitle, ebook_price ebookPrice FROM ebook ORDER BY ebook_date DESC LIMIT ?, ?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, beginRow);
 			stmt.setInt(2, rowPerPage);
@@ -28,7 +28,6 @@ public class EbookDao {
 				Ebook ebook = new Ebook();
 				ebook.setEbookTitle(rs.getString("ebookTitle"));
 				ebook.setEbookPrice(rs.getInt("ebookPrice"));
-				ebook.setEbookImg(rs.getString("ebookImg"));
 				list.add(ebook);
 			}
 		} catch(Exception e) {
