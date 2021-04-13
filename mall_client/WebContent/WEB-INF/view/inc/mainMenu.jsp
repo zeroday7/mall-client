@@ -7,8 +7,8 @@ if(session.getAttribute("loginClient") == null) {
 	<!-- 로그아웃일때  -->
 	<div>
 		<form action="<%=request.getContextPath()%>/LoginController" method="post">
-			ID : <input type="text" name="clientMail">
-			PW : <input type="password" name="clientPw">
+			ID : <input type="text" name="clientMail" value="test@gdu.co.kr">
+			PW : <input type="password" name="clientPw" value="1234">
 			<button type="submit">로그인</button>
 		</form>
 	</div>
@@ -22,6 +22,7 @@ if(session.getAttribute("loginClient") == null) {
 		</div>
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/LogoutController">로그아웃</a></li>
+			<li><a href="<%=request.getContextPath()%>/CartListController">장바구니</a></li>
 		</ul>
 	</div>
 <%	
