@@ -9,10 +9,33 @@ import java.util.List;
 import java.util.Map;
 
 import mall.client.commons.DBUtil;
+import mall.client.vo.Cart;
 import mall.client.vo.Client;
 
 public class CartDao {
 	private DBUtil dbUtil;
+	
+	public int insertCart(Cart cart) {
+		int rowCnt = 0;
+		this.dbUtil = new DBUtil();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = this.dbUtil.getConnection();
+			String sql = "INSERT INTO cart(client_mail, ebook_no, cart_date) VALUES(?, ?, NOW())";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, cart.getClientMail());
+			stmt.setInt(2, cart.getEbookNo());
+			System.out.printf("stmt: %s<cartDao.selectCartList>\n", stmt);
+			rowCnt = stmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.dbUtil.close(null, stmt, conn);
+		}
+		return rowCnt;
+	}
+	
 	public List<Map<String, Object>> selectCartList(Client client){
 		List<Map<String, Object>> list = new ArrayList<>();
 		/*
