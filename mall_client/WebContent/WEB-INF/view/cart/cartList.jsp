@@ -23,6 +23,8 @@
 			<td>ebookNo</td>
 			<td>ebookTitle</td>
 			<td>cartDate</td>
+			<td>삭제</td>
+			<td>주문</td>
 		</tr>
 		<%
 			for(Map<String, Object> map: cartList){
@@ -36,6 +38,8 @@
 				<td><%=ebookNo %></td>
 				<td><%=ebookTitle %></td>
 				<td><%=cartDate.substring(0,11) %></td>
+				<td><a href="">삭제</a></td>
+				<td><a href="">주문</a></td>
 			</tr>
 		<%
 			}

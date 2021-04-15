@@ -15,6 +15,32 @@ import mall.client.vo.Client;
 public class CartDao {
 	private DBUtil dbUtil;
 	
+	public boolean selectClientMail(Cart cart) {
+		boolean flag = true; // 중복없음
+		this.dbUtil = new DBUtil();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = this.dbUtil.getConnection();
+			String sql = "SELECT * FROM cart WHERE client_mail=? AND ebook_no=?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, cart.getClientMail());
+			stmt.setInt(2, cart.getEbookNo());
+			System.out.printf("stmt: %s<cartDao.selectCartList>\n", stmt);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				flag = false; // 중복있다
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.dbUtil.close(rs, stmt, conn);
+		}
+		return flag;
+	}
+	
 	public int insertCart(Cart cart) {
 		int rowCnt = 0;
 		this.dbUtil = new DBUtil();
