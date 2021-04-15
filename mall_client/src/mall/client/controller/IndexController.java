@@ -25,7 +25,7 @@ public class IndexController extends HttpServlet {
 		}
 		int rowPerPage = 15;
 		int beginRow = (currentPage-1)*rowPerPage;
-		
+		System.out.printf("curretnPage:%d, beginRow:%d", currentPage, beginRow);
 		// model 호출
 		this.ebookDao = new EbookDao();
 		List<Ebook> ebookList = this.ebookDao.selectEbookListByPage(beginRow, rowPerPage);

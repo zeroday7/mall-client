@@ -15,6 +15,51 @@ import mall.client.vo.Client;
 public class CartDao {
 	private DBUtil dbUtil;
 	
+	
+	
+	public void deleteCartByClient(String clientMail) {
+		this.dbUtil = new DBUtil();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			conn = this.dbUtil.getConnection();
+			String sql = "DELETE from cart WHERE client_mail =?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, clientMail);
+			System.out.printf("stmt: %s<cartDao.deleteCart>\n", stmt);
+			
+			stmt.executeUpdate();			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.dbUtil.close(null, stmt, conn);
+		}
+		
+	}
+	//카트 삭제
+	public void deleteCart(Cart cart) {
+		this.dbUtil = new DBUtil();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			conn = this.dbUtil.getConnection();
+			String sql = "DELETE from cart WHERE client_mail =? AND ebook_no=?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, cart.getClientMail());
+			stmt.setInt(2, cart.getEbookNo());
+			System.out.printf("stmt: %s<cartDao.deleteCart>\n", stmt);
+			
+			stmt.executeUpdate();			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.dbUtil.close(null, stmt, conn);
+		}
+		
+	}
+	
 	public boolean selectClientMail(Cart cart) {
 		boolean flag = true; // 중복없음
 		this.dbUtil = new DBUtil();

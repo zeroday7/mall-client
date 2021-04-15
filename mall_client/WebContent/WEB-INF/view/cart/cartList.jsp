@@ -38,7 +38,9 @@
 				<td><%=ebookNo %></td>
 				<td><%=ebookTitle %></td>
 				<td><%=cartDate.substring(0,11) %></td>
-				<td><a href="">삭제</a></td>
+				<!-- DeleteCartController - CartDao.deleteCart() - redirect:/CartListController -->
+				<td><a href="<%=request.getContextPath()%>/DeleteCartController?ebookNo=<%=ebookNo%>">삭제</a></td>
+				<!-- InsertOrdersController - insertOrders(),deleteCart():ISSUE 트랜처리 - reidirect:/OrdersListController -->
 				<td><a href="">주문</a></td>
 			</tr>
 		<%
