@@ -23,15 +23,15 @@ public class OrdersDao {
 		try {
 			conn = this.dbUtil.getConnection();
 			String sql = "SELECT t.ebook_no ebookNo, t.cnt cnt, e.ebook_title ebookTitle, e.ebook_price ebookPrice"
-						+ " FROM"
-							+ "	(SELECT ebook_no, COUNT(ebook_no) cnt"
-							+ "	FROM orders"
-							+ "	WHERE orders_state = '주문완료'"
-							+ "	GROUP BY ebook_no"
-							+ "	HAVING COUNT(ebook_no) > 1"
-							+ "	ORDER BY COUNT(ebook_no) DESC"
-							+ "	LIMIT 5) t INNER JOIN ebook e"
-							+ " ON t.ebook_no = e.ebook_no";
+					+ " FROM"
+					+ "	(SELECT ebook_no, COUNT(ebook_no) cnt"
+					+ "	FROM orders"
+					+ "	WHERE orders_state = '주문완료'"
+					+ "	GROUP BY ebook_no"
+					+ "	HAVING COUNT(ebook_no) > 1"
+					+ "	LIMIT 5) t INNER JOIN ebook e"
+					+ " ON t.ebook_no = e.ebook_no"
+					+ " ORDER BY t.cnt DESC";
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
