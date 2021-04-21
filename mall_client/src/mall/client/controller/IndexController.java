@@ -15,6 +15,7 @@ import mall.client.model.EbookDao;
 import mall.client.model.OrdersDao;
 import mall.client.model.StatsDao;
 import mall.client.vo.Ebook;
+import mall.client.vo.Stats;
 
 // C -> M -> V
 @WebServlet("/IndexController")
@@ -45,7 +46,12 @@ public class IndexController extends HttpServlet {
 		// 접속자 관련 데이터
 		this.statsDao = new StatsDao();
 		long total = this.statsDao.selectStatsTotal();
-		long statsCount = this.statsDao.selectStatsByToday().getStatsCount();
+		Stats stats = this.statsDao.selectStatsByToday();
+		long statsCount = 0;
+		if(stats != null) {
+			statsCount = stats.getStatsCount();
+		}
+		
 		
 		// View forward
 		request.setAttribute("total", total);
