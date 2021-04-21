@@ -9,14 +9,11 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/inc/mainMenu.jsp"></jsp:include>
-	<!-- you -->
-	<!-- 카테고리 -->
-	<!-- 페이징 -->
-	<!-- 검색 -->
 	
-	<!-- me -->
-	<!-- 베스트 셀러 : group by절과 count()통계함수 -->
-	<!-- 캘린더 -->
+	<div>
+		<div>오늘 접속자 수 : ${statsCount}</div>
+		<div>전체 접속자 수 : ${total}</div>
+	</div>
 	
 	<h1>index</h1>
 	<%
